@@ -25,7 +25,7 @@ import {
   Select,
 } from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function Navbar() {
   const [showSideBar, setShowSideBar] = useState(false);

@@ -1,10 +1,22 @@
-import { Button, Container, Input, TextField } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import React from "react";
-import Color from "../Config/Color";
+import FormikForm from "./FormikForm";
+import FormInput from "./FormInput";
+import * as yup from "yup";
+import FormSubmit from "./FormSubmit";
 
 export default function Login() {
+  const Schema = yup.object().shape({
+    email: yup.string().email().required(),
+    password: yup.string().required().min(8),
+  });
+
+  const handleSubmit = (values) => {
+    console.log("Login", values);
+  };
+
   return (
-    <div style={{ flexGrow: 1 }}>
+    <div style={{ flexGrow: 1, margin: "20px 0px" }}>
       <Container
         maxWidth="xs"
         style={{
@@ -16,24 +28,30 @@ export default function Login() {
         <p style={{ fontSize: 25 }}>Login</p>
         {/* <br /> */}
         <p style={{ fontSize: 14 }}>Login with your mobile no.</p>
-        <TextField
-          variant="outlined"
-          fullWidth
-          placeholder="Enter mobile no."
-          label="Phone"
-        />
-        <br />
-        <Button
-          style={{
-            backgroundColor: Color.green,
-            width: "100%",
-            margin: "10px 0px",
-            color: "white",
-            padding: "18.5px 10px",
-          }}
+        <FormikForm
+          initialValues={{ email: "", password: "" }}
+          validationSchema={Schema}
+          onSubmit={(values) => handleSubmit(values)}
         >
-          Login
-        </Button>
+          <FormInput
+            feildName="email"
+            placeholder="email"
+            variant="outlined"
+            fullWidth
+            label="Email"
+          />
+          <FormInput
+            type="password"
+            feildName="password"
+            placeholder="Password"
+            variant="outlined"
+            fullWidth
+            label="Password"
+          />
+          <FormSubmit>Login</FormSubmit>
+        </FormikForm>
+
+        <br />
       </Container>
     </div>
   );

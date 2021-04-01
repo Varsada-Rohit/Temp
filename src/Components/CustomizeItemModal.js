@@ -1,5 +1,4 @@
 import { Button, Grid, Icon, IconButton, Modal } from "@material-ui/core";
-import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import React, { useState } from "react";
 import Customiztion from "./Customiztion";
 import "./My.css";
@@ -12,6 +11,13 @@ export default function CustomizeItemModal({
   price,
 }) {
   const [itemQuantity, setItemQuantity] = useState(1);
+  const [size, setSize] = useState("Regular");
+  const [sugar, setSugar] = useState("Regular");
+  const [milk, setMilk] = useState("Regular");
+
+  const handleAddToCart = () => {
+    console.log("size : ", size, "\n sugar : ", sugar, "\n milk : ", milk);
+  };
 
   return (
     <Modal
@@ -105,6 +111,7 @@ export default function CustomizeItemModal({
           </div>
         </div>
         <Customiztion
+          onChange={(data) => setSize(data)}
           title="Size"
           options={[
             { name: "Regular", quantity: "200ml" },
@@ -113,10 +120,12 @@ export default function CustomizeItemModal({
           ]}
         />
         <Customiztion
+          onChange={(data) => setSugar(data)}
           title="Sugar"
           options={[{ name: "Regular Sugar" }, { name: "Extra Sugar" }]}
         />
         <Customiztion
+          onChange={(data) => setMilk(data)}
           title="Milk"
           options={[{ name: "Regular" }, { name: "Extra" }, { name: "less" }]}
         />
@@ -137,6 +146,7 @@ export default function CustomizeItemModal({
           </Grid>
           <Grid item xs={6}>
             <Button
+              onClick={() => handleAddToCart()}
               style={{
                 backgroundColor: "#5e7e47",
                 color: "white",

@@ -1,8 +1,7 @@
 import { Button, Grid } from "@material-ui/core";
-import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import React, { useState } from "react";
 
-export default function Customiztion({ title, options }) {
+export default function Customiztion({ title, options, onChange }) {
   const [choice, setChoice] = useState(options[0].name);
 
   return (
@@ -27,7 +26,10 @@ export default function Customiztion({ title, options }) {
 
                 // margin: 20,
               }}
-              onClick={() => setChoice(text.name)}
+              onClick={() => {
+                setChoice(text.name);
+                onChange(text.name);
+              }}
             >
               {text.name}
             </Button>
